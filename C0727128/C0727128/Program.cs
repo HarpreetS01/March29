@@ -10,17 +10,26 @@ namespace C0727128
     {
         static void Main(string[] args)
         {
-            HelloWorld hw = new HelloWorld();
-            hw.Hello();
-        }
-    }
-    class HelloWorld
-    {
-        public void Hello()
-        {
-            Console.WriteLine("Hello World");
+            Console.WriteLine(" Downloading a file");
+            Download();
+            Console.ReadLine();
         }
 
-        public int Add(int a, int b) { return a + b; }
+        static async void Download()
+        {
+            await Network.Download();
+            Console.WriteLine("Download Complete");
+        }
+
+    }
+
+    class Network
+    {
+        public async void Download()
+        {
+            HttpClient client = new HttpClient();
+            var data = await client.GetStringAsync("https://torontopubliclibrary.ca");
+            Console.WriteLine(data);
+        }
     }
 }
